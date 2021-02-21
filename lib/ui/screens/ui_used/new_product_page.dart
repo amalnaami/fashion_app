@@ -5,7 +5,6 @@ import 'package:fashion_app/backend/server.dart';
 import 'package:fashion_app/contstant.dart';
 import 'package:fashion_app/ui/components/custom_appbar.dart';
 import 'package:fashion_app/ui/components/store_item.dart';
-import 'package:fashion_app/ui/components/text_items.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';

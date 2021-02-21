@@ -1,10 +1,7 @@
-import 'package:fashion_app/backend/fashion_provider.dart';
 import 'package:fashion_app/contstant.dart';
-import 'package:fashion_app/model/depart.dart';
 import 'package:fashion_app/model/products.dart';
 import 'package:fashion_app/ui/components/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProductDetails extends StatelessWidget {
   Product product;

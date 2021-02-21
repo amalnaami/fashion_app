@@ -38,7 +38,7 @@ Future<String> signInUsingEmailAndPassword(
       .get();
   Map map = documentSnapshot.data();
   map['userId'] = userCredential.user.uid;
-  // logger.e(userCredential.user.uid);
+ logger.e(userCredential.user.uid);
   AppUser appUser = AppUser.newUser(map);
   Repository.repository.appUser = appUser;
   Get.to(HomeScreen());
@@ -100,7 +100,6 @@ Future<String> uploadImage(File file, [bool isProductImage = false]) async {
 
 fetchSplachData() async {
   getAllMarkets();
-
   AppUser appUser = await getUserFromFirebase();
   Repository.repository.appUser = appUser;
 }
@@ -136,33 +135,53 @@ getAllMarkets() async {
 }
 
 getAllMarketsProductsFromFirebase(String marketId) async {
-  QuerySnapshot querySnapshot = await firestore.collection(marketId).get();
-  List<Depart> departs = querySnapshot.docs.map((e) {
-    Map map = e.data();
-    map['departId'] = e.id;
-    return Depart.fromMap(map);
-  }).toList();
-  Provider.of<FashionProvider>(Get.context, listen: false).setDeparts(departs);
-}
+  QuerySnapshot querySnapshot = await firestore
+      .collection('Markets')
+      .doc(marketId)
+      .collection('MarketProduct')
+      .get();
 
-reportProduct(String productId, String userId, String reportReason) async {
-  await firestore
-      .collection('Reports')
-      .doc(productId)
-      .collection('Users')
-      .doc(userId)
-      .set({'reportReason': reportReason});
+  List<Product> products = querySnapshot.docs.map((e) {
+    Map map = e.data();
+    map['productId'] = e.id;
+    return Product.fromMap(map);
+  }).toList();
+  Provider.of<FashionProvider>(Get.context, listen: false)
+      .setProducts(products);
 }
+// getAllMarkets() async {
+//   QuerySnapshot querySnapshot = await firestore
+//       .collection('users')
+//       .where('isStore', isEqualTo: true)
+//       .get();
+//   List<Market> markets = querySnapshot.docs.map((e) {
+//     Map map = e.data();
+//     map['marketId'] = e.id;
+//     return Market.fromMap(map);
+//   }).toList();
+//   Provider.of<FashionProvider>(Get.context, listen: false).setMarkets(markets);
+// }
+//
+//
+// getAllMarketsProductsFromFirebase(String marketId) async {
+//   QuerySnapshot querySnapshot = await firestore.collection(marketId).get();
+//   List<Depart> departs = querySnapshot.docs.map((e) {
+//     Map map = e.data();
+//     map['departId'] = e.id;
+//     return Depart.fromMap(map);
+//   }).toList();
+//   Provider.of<FashionProvider>(Get.context, listen: false).setDeparts(departs);
+// }
+
 
 ///TODO
 addNewProducts(Map map) async {
   String productImageUrl = await uploadImage(map['file'], true);
   map.remove('file');
   map['imageUrl'] = productImageUrl;
-  await firestore
-      .collection(Repository.repository.appUser.userId)
-      .doc(map['departId'])
-      .collection('Products')
+  await firestore.collection('Products')
+      .doc(Repository.repository.appUser.userId)
+      .collection(map['departId'])
       .add({...map});
   Get.back();
   print(
@@ -171,9 +190,9 @@ addNewProducts(Map map) async {
 
 getAllProductsFromFirebase(String departId) async {
   QuerySnapshot querySnapshot = await firestore
-      .collection(Repository.repository.appUser.userId)
-      .doc(departId)
       .collection('Products')
+      .doc(Repository.repository.appUser.userId)
+      .collection(departId)
       .get();
   List<Product> products = querySnapshot.docs.map((e) {
     Map map = e.data();
@@ -184,4 +203,5 @@ getAllProductsFromFirebase(String departId) async {
   Provider.of<FashionProvider>(Get.context, listen: false)
       .setProducts(products);
 }
+
 

@@ -6,7 +6,6 @@ import 'package:fashion_app/contstant.dart';
 import 'package:fashion_app/model/user_model.dart';
 import 'package:fashion_app/ui/components/custom_appbar.dart';
 import 'package:fashion_app/ui/components/store_item.dart';
-import 'file:///C:/Users/AMEL/IdeaProjects/fashion_app/lib/ui/screens/ui_used/login_screen.dart';
 import 'package:fashion_app/ui/screens/ui_used/main_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';

@@ -43,8 +43,8 @@ class HomeItems extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(translator.translate( name),style: titleStyle.copyWith(color: pinkColor,fontSize: 18),),
-                    Text(translator.translate( price),style: titleStyle.copyWith(color: brownColor,fontSize: 18),),
+                    Text(translator.translate( name),style: titleStyle.copyWith(color: pinkColor,fontSize: 17),),
+                    Text(translator.translate( price),style: titleStyle.copyWith(color: brownColor,fontSize: 14),),
                   ],
                 ))
 

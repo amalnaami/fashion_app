@@ -1,6 +1,5 @@
 import 'package:fashion_app/backend/fashion_provider.dart';
 import 'package:fashion_app/contstant.dart';
-import 'package:fashion_app/model/depart.dart';
 import 'package:fashion_app/model/products.dart';
 import 'package:fashion_app/ui/components/custom_appbar.dart';
 import 'package:fashion_app/ui/screens/ui_used/product_details.dart';
@@ -73,7 +72,7 @@ class ProductPage extends StatelessWidget {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 130.w,
+                                  height: 120.w,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(14),
                                       image: DecorationImage(
@@ -84,11 +83,11 @@ class ProductPage extends StatelessWidget {
                                 ),
                                 Text(
                                   value[index].name,
-                                  style: titleStyle.copyWith(fontSize: 16,color: brownColor),
+                                  style: titleStyle.copyWith(fontSize: 13,color: brownColor),
                                 ),
                                 Text(
                                   value[index].price,
-                                  style: titleStyle.copyWith(fontSize: 16),
+                                  style: titleStyle.copyWith(fontSize: 13),
                                 ),
                               ],
                             ),
