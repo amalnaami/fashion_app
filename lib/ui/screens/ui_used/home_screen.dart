@@ -180,7 +180,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? Center(
                 child:  SpinKitFadingCube(
                   color: pinkColor,
-                  // color: HexColor(cyanColor),
                   size: 50.0,
                 ),
               )

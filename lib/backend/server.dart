@@ -120,35 +120,7 @@ addNewDepart(Map map) async {
   //     .add({...map});
   Get.back();
 }
-
-getAllMarkets() async {
-  QuerySnapshot querySnapshot = await firestore
-      .collection('users')
-      .where('isStore', isEqualTo: true)
-      .get();
-  List<Market> markets = querySnapshot.docs.map((e) {
-    Map map = e.data();
-    map['marketId'] = e.id;
-    return Market.fromMap(map);
-  }).toList();
-  Provider.of<FashionProvider>(Get.context, listen: false).setMarkets(markets);
-}
-
-getAllMarketsProductsFromFirebase(String marketId) async {
-  QuerySnapshot querySnapshot = await firestore
-      .collection('Markets')
-      .doc(marketId)
-      .collection('MarketProduct')
-      .get();
-
-  List<Product> products = querySnapshot.docs.map((e) {
-    Map map = e.data();
-    map['productId'] = e.id;
-    return Product.fromMap(map);
-  }).toList();
-  Provider.of<FashionProvider>(Get.context, listen: false)
-      .setProducts(products);
-}
+//
 // getAllMarkets() async {
 //   QuerySnapshot querySnapshot = await firestore
 //       .collection('users')
@@ -162,9 +134,12 @@ getAllMarketsProductsFromFirebase(String marketId) async {
 //   Provider.of<FashionProvider>(Get.context, listen: false).setMarkets(markets);
 // }
 //
-//
 // getAllMarketsProductsFromFirebase(String marketId) async {
-//   QuerySnapshot querySnapshot = await firestore.collection(marketId).get();
+//   QuerySnapshot querySnapshot = await firestore
+//       .collection('Markets')
+//       .doc(marketId)
+//       .collection('MarketProduct')
+//       .get();
 //   List<Depart> departs = querySnapshot.docs.map((e) {
 //     Map map = e.data();
 //     map['departId'] = e.id;
@@ -172,6 +147,29 @@ getAllMarketsProductsFromFirebase(String marketId) async {
 //   }).toList();
 //   Provider.of<FashionProvider>(Get.context, listen: false).setDeparts(departs);
 // }
+getAllMarkets() async {
+  QuerySnapshot querySnapshot = await firestore
+      .collection('users')
+      .where('isStore', isEqualTo: true)
+      .get();
+  List<Market> markets = querySnapshot.docs.map((e) {
+    Map map = e.data();
+    map['marketId'] = e.id;
+    return Market.fromMap(map);
+  }).toList();
+  Provider.of<FashionProvider>(Get.context, listen: false).setMarkets(markets);
+}
+
+
+getAllMarketsProductsFromFirebase(String marketId) async {
+  QuerySnapshot querySnapshot = await firestore.collection(marketId).get();
+  List<Depart> departs = querySnapshot.docs.map((e) {
+    Map map = e.data();
+    map['departId'] = e.id;
+    return Depart.fromMap(map);
+  }).toList();
+  Provider.of<FashionProvider>(Get.context, listen: false).setDeparts(departs);
+}
 
 
 ///TODO
